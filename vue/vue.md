@@ -76,3 +76,98 @@ url: '<a href="http://www.baidu.com">百度一下</a>'
 </script>
 ```
 
+## v-bind 数组语法
+
+```html
+<h2 :class="['active', 'line']">
+    {{msg}}
+</h2>
+<script>
+const app = new Vue({
+    el: '#app',
+    data: {
+        msg: 'hello'
+    }
+})
+</script>
+```
+
+## v-bind 绑定 style
+
+- 对象语法
+
+```html
+<h2 :style="{fontSize: '50px'}">
+    {{msg}}
+</h2>
+```
+
+- 数组语法
+
+```html
+<h2 :style="[baseStyle, a]">
+    {{msg}}
+</h2>
+<script>
+	const app = new Vue({
+        el: "#app",
+        data: {
+            msg: "hello",
+            baseStyle: {backgroundColor: 'red'},
+            a: {fonSize: '18px'},
+        }
+    })
+</script>
+```
+
+## computed 计算属性
+
+- 计算属性会进行缓存，如果多次使用，计算属性只会调用一次
+
+```html
+<h2>总价格：{{totalPrice}}</h2>
+<script>
+const app = new Vue({
+    el: '#app',
+    data: {
+		books: [
+            {id:100, name: '1', price: 119},
+            {id:101, name: '2', price: 190},
+            {id:102, name: '3', price: 219},
+            {id:103, name: '4', price: 519},
+        ]
+    },
+    computed: {
+        totalPrice() {
+            let result = 0;
+            for (let i=0; i<this.books.length;i++) {
+                result += this.books[i].price
+            }
+            return result
+        }
+    }
+})
+</script>
+```
+
+ ### computed 的 setter  和  getter
+
+```javascript
+computed: {  // 计算属性一般只要实现 get 方法就行,这样是作为只读属性
+    fullName: {
+        set: function(newValue) {
+            console.log(newValue)
+            const names = newValue.split(' ');
+            this.firstName = names[0];
+            this.lastName = names[1];
+        },
+        get: function() {
+            return this.firstName + ' ' + this.lastName
+        }
+    }
+}
+```
+
+## methods 和 computed 对比
+
+- computed 会进行缓存，如多次使用，computed只会调用一次
