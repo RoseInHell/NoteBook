@@ -32,24 +32,33 @@ column：主轴从上到下						 colum-reverse：主轴从下到上
 ###  2 . justify-content   决定 flex items 在主轴上的对齐方式
 
 - flex-start(默认值): 与main start 对齐
-
 - flex-end: 与main end 对齐
-
 - center: 居中对齐
-
 - space-between: 
   - flex items 之间的距离相等
   - 与 main start、main end 两端对齐
 - space-evenly: 
   - flex items 之间的距离相等
   - flex items 与 main start、main end 之间距离等于 flex items 之间的距离
+- **spce-evenly兼容性问题较差**
+  - 解决方法
+
+```css
+// space-evenly 兼容性问题解决方案
+justify-content: space-between; 			
+&:before,&:after { 			
+	content: ''; 			
+	display: block; 		
+}
+```
+
+
+
 - space-around: 
   - flex items 之间的距离相等
   - flex items 与 main start、main end 之间的距离是 flex items 之间距离的一半
 
-![](D:\working\学习笔记\css\justify-between.jpg)
-
-
+![](C:\Users\Administrator\Desktop\NoteBook\css\justify-between.jpg)
 
 ###  3. align-items  决定了 flex items 在 cross axis(交叉轴) 上的对齐方式
 - normal : 在 flex 布局中，效果和 stretch 一样 (前提是 flex items 没设高度)
@@ -59,7 +68,7 @@ column：主轴从上到下						 colum-reverse：主轴从下到上
 - center: 居中对齐
 - baseline: 与基准线对齐(第一行文字的高度)
 
-![](D:\working\学习笔记\css\align-items.jpg)
+![](C:\Users\Administrator\Desktop\NoteBook\css\align-items.jpg)
 
 ###  4. 默认情况下，所以的flex items 都会在同一行显示
 
