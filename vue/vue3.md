@@ -112,3 +112,8 @@ data: {
 ## v-for添加key
 
 - key 的作用主要是为了高效的更新虚拟 DOM
+
+## Vue.set
+
+- set(要修改的对象，索引值，修改后的值)
+- Vue.set(this.letters, 0 , 'bbbbb')
