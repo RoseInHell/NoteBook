@@ -66,7 +66,7 @@
   - 给input添加key，并且保证key的不同
 
 ```html
-<input type>
+<input key='11'>
 ```
 
 ## v-show 和 v-if 对比
