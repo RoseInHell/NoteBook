@@ -12,4 +12,19 @@
   - 例如 `a.toString()`	
     - **该方法不会影响原变量，它会将转换的结果返回**
 
-  
+
+## for循环
+
+```javascript
+for (let i in this.books) {
+    const book = this.books[i];
+    totalPrice += this.boooks[i];
+}
+```
+
+```javascript
+for (let item of this.books) {
+    totalPrice += item.price * item.count
+}
+```
+
