@@ -117,3 +117,31 @@ data: {
 
 - set(要修改的对象，索引值，修改后的值)
 - Vue.set(this.letters, 0 , 'bbbbb')
+
+## v-model 
+
+- v-mode 其实是一个语法糖，它的背后本质上是包含两个操作：
+  - v-bind 绑定一个value属性
+  - v-on 指令给当前元素绑定 input 事件
+
+```css
+<input type="text" v-model="message">
+等同于
+<input type="text" v-bind:value="message" v-on:input="message = $event.target.value">
+```
+
+- lazy 修饰符：
+  - 让数据在失去焦点或回车时才更新
+- number 修饰符：
+  - 默认情况下，输入框中无论输入的字母还是数字，都会被当做字符串类型进行处理
+  - number 修饰符可以让输入框中输入的内容自动转成数字类型
+- trim 修饰符：
+  - trim 修饰符可以过滤内容左右两边的空格
+
+## 访问父组件
+
+- this.$parent.value
+
+## 访问根组件
+
+- this.$root.value

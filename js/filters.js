@@ -16,3 +16,19 @@ let newNums = nums.filter(n => {
 let newNums2 = newNums.map(n => {
     return n * 2
 })
+
+
+// reduce函数的使用
+// 对数组种所有的内容进行汇总
+let newNums2 = [20, 40, 80, 100]
+let total = newNums2.reduce((preValue, n ) => {
+    return preValue + n
+}, 0)
+
+// 第一次: preValue: 0,  n: 20
+// 第二次: preValue: 20,  n: 40
+// 第三次: preValue: 60,  n: 80
+// 第四次: preValue: 80,  n: 100
+// 最终 240
+
+
