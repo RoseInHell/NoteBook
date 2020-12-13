@@ -22,7 +22,7 @@ sharp('./bar.jpg')
   .resize(100, 100)
   .toFile('./biz.jpg');
 
-sharp('./foo.txt')
+sharp('./bar.jpg')
   .resize(300, 300)
   .toBuffer()
   .then(data => {
