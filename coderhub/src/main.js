@@ -1,8 +1,7 @@
-const Koa = require('koa');
+const app = require('./app/index')
+const config = require('./app/config')
 
-const app = new Koa();
 
-
-app.listen(8888, () => {
-  console.log("服务器启动成功~");
+app.listen(config.APP_PORT, () => {
+  console.log(`服务器在${config.APP_PORT}端口启动成功~`);
 })
