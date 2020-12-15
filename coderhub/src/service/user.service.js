@@ -1,4 +1,5 @@
 const connection = require('../app/database')
+
 class UserService {
   async create(user) {
     const { name, password } = user;
@@ -9,5 +10,6 @@ class UserService {
     return result
   }
 }
+
 
 module.exports = new UserService();
