@@ -1,5 +1,4 @@
 const connection = require('../app/database')
-
 class UserService {
   async create(user) {
     const { name, password } = user;
@@ -7,7 +6,14 @@ class UserService {
 
     const result = await connection.execute(statement, [name, password]);
     // 将user存储到数据库中
-    return result
+    return result[0];
+  }
+
+  async getUserByName(name) {
+    const statement = `SELECT * FROM users WHERE name = ?;`
+    const result = await connection.execute(statement, [name]);
+
+    return result[0];
   }
 }
 
