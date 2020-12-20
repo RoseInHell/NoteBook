@@ -1,8 +1,12 @@
+const jwt = require('jsonwebtoken');
+
 const errorType = require('../constants/error-types');
 const userService = require('../service/user.service');
 const md5password = require('../utils/password-handle');
+const { PUBLIC_KEY } = require('../app/config');
 
 const verifyLogin = async (ctx, next) => {
+  console.log('验证登录的middleware~');
   // 1.获取用户名和密码
   const { name, password } = ctx.request.body;
 
@@ -26,10 +30,42 @@ const verifyLogin = async (ctx, next) => {
     const error = new Error(errorType.PASSWORD_IS_INCORRECT);
     return ctx.app.emit('error', error, ctx);
   }
+  ctx.user = user;
 
   await next();
 }
 
+const verifyAuth = async (ctx, next) => {
+  console.log("验证授权的middleware~");
+  // 1.获取token
+  const authorization = ctx.headers.authorization;
+  if (!authorization) {
+    const error = new Error(errorType.UNAUTHORIZATION);
+    return ctx.app.emit('error', error, ctx);
+  }
+  const token = authorization.replace("Bearer ", "");
+
+  // 2.验证token
+  try {
+    const result = jwt.verify(token, PUBLIC_KEY, {
+      algorithms: ["RS256"]
+    })
+    ctx.user = result;
+
+    await next()
+  } catch (err) {
+    const error = new Error(errorType.UNAUTHORIZATION);
+    ctx.app.emit('error', error, ctx);
+  }
+  
+}
+// postman设置
+// const res = pm.response.json();
+// pm.globals.set("token", res.token);
+
+
+
 module.exports = {
-  verifyLogin
+  verifyLogin,
+  verifyAuth
 }

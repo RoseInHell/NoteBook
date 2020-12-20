@@ -1,11 +1,16 @@
 // npm install dotenv
 const dotenv = require('dotenv');
+const fs = require('fs');
+const path = require('path');
 
 dotenv.config()
 
 // console.log(process.env.APP_PORT);
 
 // const { APP_PORT } = process.env;
+const PRIVATE_KEY = fs.readFileSync(path.resolve(__dirname, './key/private.key'));
+const PUBLIC_KEY = fs.readFileSync(path.resolve(__dirname, './key/public.key'));
+
 
 module.exports = {
   APP_PORT,
@@ -13,6 +18,9 @@ module.exports = {
   MYSQL_PORT,
   MYSQL_DATABASE, 
   MYSQL_USER,
-  MYSQL_PASSWORD 
+  MYSQL_PASSWORD
 
-} = process.env
+} = process.env;
+
+module.exports.PRIVATE_KEY = PRIVATE_KEY;
+module.exports.PUBLIC_KEY = PUBLIC_KEY;

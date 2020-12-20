@@ -5,6 +5,7 @@ class UserController {
     const user = ctx.request.body;
     // 查询数据
     const result = await userService.create(user);
+    
 
     // 返回数据
     ctx.body = result;
