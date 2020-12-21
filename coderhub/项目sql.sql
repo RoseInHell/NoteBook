@@ -36,3 +36,6 @@ SELECT
 FROM moment m 
 LEFT JOIN user u ON m.user_id = u.id
 LIMIT ?, ?;
+
+
+SELECT * FROM moment WHERE id = ? AND user_id = ?;

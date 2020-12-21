@@ -29,6 +29,17 @@ class MomentController {
     const result = await momentService.getMomentList(offset, size);
     ctx.body = result[0];
   }
+
+  async update(ctx, next) {
+    // 1.获取数据
+    const { momentId } = ctx.params;
+    const { content } = ctx.request.body;
+    const { id } = ctx.user;
+
+    
+    ctx.body = '查询成功'
+    
+  }
 }
 
 module.exports = new MomentController();
