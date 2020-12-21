@@ -10,4 +10,4 @@ momentRouter.post('/', verifyAuth, create);
 momentRouter.get('/', list);
 momentRouter.get('/:momentId', detail);
 
-module.exports = momentRouter
+module.exports = momentRouter;
