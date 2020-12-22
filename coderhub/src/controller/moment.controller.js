@@ -34,11 +34,22 @@ class MomentController {
     // 1.获取数据
     const { momentId } = ctx.params;
     const { content } = ctx.request.body;
-    const { id } = ctx.user;
 
+    // 2.修改内容
+    const result = await momentService.update(content, momentId);
+
+    ctx.body = result
     
-    ctx.body = '查询成功'
-    
+  }
+
+  async remove(ctx, next) {
+    // 1.获取momentId
+    const { momentId } = ctx.params;
+
+    // 2.删除内容
+    const result = await momentService.remove(momentId);
+
+    ctx.body = result;
   }
 }
 

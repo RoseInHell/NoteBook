@@ -51,26 +51,33 @@ const verifyAuth = async (ctx, next) => {
     const result = jwt.verify(token, PUBLIC_KEY, {
       algorithms: ["RS256"]
     })
+    console.log(result)
     ctx.user = result;
 
     await next();
   } catch (err) {
+    console.log(err)
     const error = new Error(errorType.UNAUTHORIZATION);
     ctx.app.emit('error', error, ctx);
   }
   
 }
 
+/*
+    1.很多内容都需要验证权限：修改/删除动态， 修改/删除评论
+    2.接口： 业务接口/后台管理系统系统
+*/
 const verifyPermission = async (ctx, next) => {
   console.log("验证权限的middleware~");
   // 1.获取参数
-  const { momentId } = ctx.params;
+  const [resourceKey] = Object.keys(ctx.params);
+  const tableName = resourceKey.replace('Id', '');
+  const resourceId = ctx.params[resourceKey];
   const { id } = ctx.user;
 
   // 2.查询是否具备权限
   try {
-    const isPermission = await authService.checkMoment(momentId, id);
-    console.log(isPermission)
+    const isPermission = await authService.checkResource(tableName, resourceId, id);
     if (!isPermission) throw new Error();
     await next();
 
@@ -78,9 +85,28 @@ const verifyPermission = async (ctx, next) => {
     const error = new Error(errorType.UNPERMISSION);
     return ctx.app.emit('error', error, ctx);
   }
-  
-  
 }
+
+// 闭包方式
+// const verifyPermission = (tableName) => {
+//   return async (ctx, next) => {
+//     console.log("验证权限的middleware~");
+//     // 1.获取参数
+//     const { momentId } = ctx.params;
+//     const { id } = ctx.user;
+  
+//     // 2.查询是否具备权限
+//     try {
+//       const isPermission = await authService.checkResource(tableName, momentId, id);
+//       if (!isPermission) throw new Error();
+//       await next();
+  
+//     } catch (err) {
+//       const error = new Error(errorType.UNPERMISSION);
+//       return ctx.app.emit('error', error, ctx);
+//     }
+//   }
+// }
 // postman设置
 // const res = pm.response.json();
 // pm.globals.set("token", res.token);
