@@ -1,12 +1,12 @@
 const connection = require('../app/database');
 
-const sqlFragment = `
-      SELECT 
-          m.id id , m.content content, m.createAt createTime,
-          m.updateAt updateTime, 
-          JSON_OBJECT('id', u.id, 'name', u.name) user
-      FROM moment m 
-      LEFT JOIN user u ON m.user_id = u.id`
+// const sqlFragment = `
+//       SELECT 
+//           m.id id , m.content content, m.createAt createTime,
+//           m.updateAt updateTime, 
+//           JSON_OBJECT('id', u.id, 'name', u.name) user
+//       FROM moment m 
+//       LEFT JOIN user u ON m.user_id = u.id`
 
 
 class MomentService {
@@ -20,17 +20,28 @@ class MomentService {
   
   async getMomentById(id) {
     const statement = `
-          ${sqlFragment}
-          WHERE m.id = ?;`;
+            SELECT 
+                m.id id , m.content content, m.createAt createTime,
+                m.updateAt updateTime, 
+                JSON_OBJECT('id', u.id, 'name', u.name) user
+            FROM moment m 
+            LEFT JOIN user u ON m.user_id = u.id
+            WHERE m.id = ?;`;
     const result = await connection.execute(statement, [id]);
-    console.log(result[0])
     return result[0];
   }
 
   async getMomentList(offset, size) {
+    
     const statement = `
-      ${sqlFragment}
-      LIMIT ?, ?;`
+            SELECT 
+                m.id id , m.content content, m.createAt createTime,
+                m.updateAt updateTime, 
+                JSON_OBJECT('id', u.id, 'name', u.name) user,
+                (SELECT COUNT(*) FROM comment WHERE comment.moment_id = m.id) commentCount
+            FROM moment m 
+            LEFT JOIN user u ON m.user_id = u.id
+            LIMIT ?, ?;`
       const result = connection.execute(statement, [offset, size]);
       return result;
   }

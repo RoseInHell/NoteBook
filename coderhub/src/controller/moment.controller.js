@@ -24,9 +24,10 @@ class MomentController {
   async list(ctx, next) {
     // 1.获取数据(offset/size)
     const { offset, size } = ctx.query;
-
+    
     // 2.查询列表
     const result = await momentService.getMomentList(offset, size);
+    
     ctx.body = result[0];
   }
 
