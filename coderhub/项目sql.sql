@@ -55,3 +55,51 @@ CREATE TABLE IF NOT EXISTS comment (
 );
 
 INSERT INTO comment (content, moment_id, user_id) VALUES (?, ?, ?);
+
+CREATE TABLE IF NOT EXISTS label (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(10) NOT NULL UNIQUE,
+	createAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS moment_label (
+	moment_id INT NOT NULL,
+	label_id INT NOT NULL,
+	createAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (moment_id, label_id),
+	FOREIGN KEY (moment_id) REFERENCES moment(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (label_id) REFERENCES label(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+SELECT 
+		m.id id , m.content content, m.createAt createTime,
+		m.updateAt updateTime, 
+		JSON_OBJECT('id', u.id, 'name', u.name) user,
+		(SELECT COUNT(*) FROM comment WHERE comment.moment_id = m.id) commentCount,
+		(SELECT COUNT(*) FROM moment_label ml WHERE ml.moment_id = m.id) labelCount
+FROM moment m 
+LEFT JOIN user u ON m.user_id = u.id
+LIMIT ?, ?;
+
+SELECT 
+		m.id id , m.content content, m.createAt createTime,
+		m.updateAt updateTime,
+		IF (COUNT(c.id), 
+		JSON_ARRAYAGG(
+			JSON_OBJECT('id', c.id, 'content', c.content, 'commentId', c.comment_id,
+									'createTime', c.createAt
+									'user', JSON_OBJECT('id', cu.id, 'name', cu.name)) 
+		), NULL) comments
+		IF (COUNT(l.id),JSON_ARRAYAGG(
+		JSON_OBJECT('id', l.id, 'name', l.name)
+		),NULL) labels
+FROM moment m 
+LEFT JOIN user u ON m.user_id = u.id
+LEFT JOIN comment c ON c.moment_id = m.id
+LEFT JOIN user cu ON c.user_id = cu.id
+LEFT JOIN moment_label ml ON m.id = ml.moment_id
+LEFT JOIN label l ON ml.label_id = l.id
+WHERE m.id = 1
+GROUP BY m.id;
