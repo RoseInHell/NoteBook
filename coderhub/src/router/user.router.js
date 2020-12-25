@@ -1,7 +1,8 @@
 // npm install koa-router
 const Router = require('koa-router');
 const {
-  create
+  create,
+  avatarInfo
 } = require('../controller/user.controller');
 const { 
   verifyUser, 
@@ -10,6 +11,7 @@ const {
 
 const userRouter = new Router({prefix: '/users'});
 
-userRouter.post('/', verifyUser, handlePassword, create)
+userRouter.post('/', verifyUser, handlePassword, create);
+userRouter.get('/:userId/avatar', avatarInfo)
 
 module.exports = userRouter;
