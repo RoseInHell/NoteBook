@@ -32,4 +32,3 @@ testRouter.get('/demo', (ctx, next) => {
     ctx.body = "token是无效的"
   }
 })
-

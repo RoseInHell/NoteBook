@@ -1,3 +1,4 @@
+// js 解决要点 利用数据结构 栈
 function a(item) {
   switch(item) {
     case ')' : return '(';
@@ -9,32 +10,20 @@ function a(item) {
 var isValid = function(s) {
   let length = s.length;
   if (s.length % 2 === 1) return false;
+  let stack = [];
   for (let i=0; i<length; i++) {
-    for (let j=length-1; j>i; j-- ) {
-      console.log(s[i], a(s[j]), (i+j)%2 ===1)
-      if (s[i] === a(s[j]) && ((i+j)%2 ===1)) {
-
-      }else {
-        // return false
-      }
+    if(s[i] ==='(' || s[i]=== '[' || s[i] === '{') {
+      stack.push(s[i]);
+    } else {
+      if (stack.pop() !== a(s[i])) {
+        return false;
+      } 
     }
   }
-
-  // let mid = length / 2
-  // for (let i=0; i<length-1; i++) {
-  //   console.log(s[i])
-  //   if (s[i] === a(s[i+1])) {
-  //     i++;
-  //     console.log(123)
-  //   } else if (s[i] === a(s[length-i-1])) {
-
-  //   } else {
-  //     return false
-  //   }
-  // }
-  // return true
+  if (stack.length > 0) return false;
+  return true;
 };
 
 // console.log(isValid("(){}}{"))
-// console.log(isValid("{[]}"))
-console.log(isValid("(([]){})"))
+console.log(isValid("()"))
+// console.log(isValid("(([]){})"))
