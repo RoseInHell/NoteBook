@@ -1,4 +1,3 @@
-const { AVATAR_PATH } = require('../constants/file-path');
 const fileService = require('../service/file.service');
 const userService = require('../service/user.service');
 const { APP_HOST, APP_PORT } = require('../app/config');
@@ -8,8 +7,8 @@ class FileController {
   async saveAvatarInfo(ctx, next) {
     // 1.获取图像相关的信息
     const { mimetype, filename, size } = ctx.req.file;
-    const { id } = ctx.user
-    
+    const { id } = ctx.user;
+
     // 2.将图像信息数据保存到数据库中
     await fileService.createAvatar(mimetype, filename, size, id);
 
@@ -37,7 +36,7 @@ class FileController {
 
     }
 
-    ctx.body = '动态配图上传完成'
+    ctx.body = '动态配图上传完成';
   }
 }
 

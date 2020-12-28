@@ -13,7 +13,7 @@ var isValid = function(s) {
     for (let j=length-1; j>i; j-- ) {
       console.log(s[i], a(s[j]), (i+j)%2 ===1)
       if (s[i] === a(s[j]) && ((i+j)%2 ===1)) {
-
+        s.pop
       }else {
         // return false
       }

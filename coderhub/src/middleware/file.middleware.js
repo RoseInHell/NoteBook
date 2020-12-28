@@ -2,7 +2,6 @@ const path = require('path');
 const Multer = require('koa-multer');
 const Jimp = require('jimp');
 
-
 const { AVATAR_PATH, PICTURE_PATH } = require('../constants/file-path');
 
 // 上传头像
@@ -19,6 +18,7 @@ const pictureUpload = Multer({
 });
 
 const pictureHandler = pictureUpload.array('picture', 9)
+
 
 // 调整图片大小
 const pictureResize = async (ctx, next) => {

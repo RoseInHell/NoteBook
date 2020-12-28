@@ -58,7 +58,7 @@ class MomentController {
   }
 
   async addLabels(ctx, next) {
-    // 1.获取标签何动态id
+    // 1.获取标签和动态id
     const { labels } = ctx;
     const { momentId } = ctx.params;
 
@@ -71,7 +71,7 @@ class MomentController {
       }
     }
 
-    ctx.body = "给动态添加标签成功"
+    ctx.body = "给动态添加标签成功";
   }
 
   async fileInfo(ctx, next) {
