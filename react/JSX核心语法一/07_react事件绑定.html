@@ -20,23 +20,26 @@
         super(props);
 
         this.state = {
-          title: "标题",
-          imgUrl: "",
+          message: 'hello'
         }
+
+        this.btnClick = this.btnClick.bind(this)
+        
       }
 
       render() {
-        return (
+        return(
           <div>
-            <h2 title={this.state.title}></h2>
-            <img src="" alt="" />
-            {/* 2.绑定class */}
-            <div className="{box title}"></div>
-            {/* 3.绑定style */}
-            <div style={{height: '200px', fontSize: '50px'}}>我是div， 绑定stye属性</div>
+            <button onClick={() => this.btnClick(event)}>+1</button>
           </div>
         )
       }
+
+      btnClick(event) {
+        console.log(event)
+        console.log(123)
+      }
+
     }
     ReactDOM.render(<App/>, document.getElementById('app'));
   </script>
