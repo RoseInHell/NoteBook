@@ -75,12 +75,12 @@ class MomentController {
   }
 
   async fileInfo(ctx, next) {
-    const { filename } = ctx.params;
+    let { filename } = ctx.params;
     const fileInfo = await fileService.getFileByFilename(filename);
     const { type } = ctx.query;
     const types = ["small", "middle", "large"];
     if (types.some(item => item === type)) {
-      filename = filename = '-' + type;
+      filename = filename + '-' + type;
     }
 
     ctx.response.set('content-type', fileInfo.mimetype);

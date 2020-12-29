@@ -32,7 +32,7 @@ const pictureResize = async (ctx, next) => {
     Jimp.read(file.path).then(imgage => {
       imgage.resize(1280, Jimp.AUTO).write(`${destPath}-large`);
       imgage.resize(640, Jimp.AUTO).write(`${destPath}-middle`);
-      imgage.resize(640, Jimp.AUTO).write(`${destPath}-small`);
+      imgage.resize(320, Jimp.AUTO).write(`${destPath}-small`);
     })
   }
 

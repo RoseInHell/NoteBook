@@ -26,7 +26,7 @@ class FileService {
     const statement = `SELECT * FROM file WHERE filename = ?;`;
     const [result] = await connection.execute(statement, [filename]);
     
-    return result;
+    return result[0];
   }
 }
 
