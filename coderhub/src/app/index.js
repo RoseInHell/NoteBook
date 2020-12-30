@@ -1,7 +1,7 @@
 const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
 
-const useRoutes = require('../router/index')
+const useRoutes = require('../router/index');
 
 const errorHandler = require('./error-handle');
 
