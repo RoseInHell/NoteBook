@@ -8,6 +8,20 @@ class MomentService {
 
     return result;
   }
+
+  async getMomentList(offset, size) {
+    const statement = `SELECT * FROM moment LIMIT ? , ?;`;
+    const [result] = await connection.execute(statement, [offset, size]);
+
+    return result;
+  }
+
+  async getMomentById(id) {
+    const statement = `SELECT * FROM moment WHERE id = ?;`;
+    const [result] = await connection.execute(statement, [id]);
+
+    return  result[0]
+  }
 }
 
 module.exports = new MomentService();
