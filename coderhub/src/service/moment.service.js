@@ -46,7 +46,7 @@ class MomentService {
             FROM moment m 
             LEFT JOIN user u ON m.user_id = u.id
             LIMIT ?, ?;`
-      const result = connection.execute(statement, [offset, size]);
+      const result = await connection.execute(statement, [offset, size]);
 
       return result;
   }

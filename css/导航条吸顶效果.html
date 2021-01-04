@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container{
+      /* width:400px;
+      height: 300px;
+      overflow-y: auto;
+      border:1px solid#dedede;
+      position: absolute;
+      margin: auto;
+      top:0;
+      left: 0;
+      right: 0;
+      bottom: 0;  */
+    }
+    .nav-title{
+      height: 40px;
+      text-align: center;
+      line-height: 40px;
+      color:#fff;
+      position: -webkit-sticky;
+      position: sticky;
+      text-align: center;
+      z-index: 2;
+    }
+    .nav-content{
+      color:#fff;
+      text-align: center;
+      z-index: 1;
+      height: 400px;
+    }
+    .title1{      
+      background:red;
+      top:0;
+    }
+    .title2{      
+      background:blue;
+      top:40px;
+    }
+    .title3{      
+      background:green;
+      top:80px;
+    }
+    .title4{      
+      background:purple;
+      z-index: 5;
+      top:120px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-title title1">标题一</div>
+    <div class="nav-content content1">标题内容一</div>
+    <div class="nav-title title2">标题二</div>
+    <div class="nav-content content2">标题内容二</div>
+    <div class="nav-title title3">标题三</div>
+    <div class="nav-content content3">标题内容三</div>
+    <div class="nav-title title4">标题四</div>
+    <div class="nav-content content4">标题内容四</div>
+  </div>
+</body>
+</html>

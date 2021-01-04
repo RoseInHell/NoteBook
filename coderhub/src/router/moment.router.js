@@ -8,8 +8,10 @@ const { verifyAuth, verifyPermission } = require('../middleware/auth.middleware'
 
 const { verifyLabelExists } = require('../middleware/label.middleware');
 
+// 发表动态
 momentRouter.post('/', verifyAuth, create);
 
+// 获取动态
 momentRouter.get('/', list);
 momentRouter.get('/:momentId', detail);
 

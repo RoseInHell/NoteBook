@@ -11,6 +11,21 @@ class MomentController {
 
     ctx.body = result;
   }
+
+  async list(ctx, next) {
+    const { offset, size } = ctx.query;
+    const result = await momentService.getMomentList(offset, size);
+
+    ctx.body = result;
+  }
+
+  async detail(ctx, next) {
+    const { momentId } = ctx.params;
+    const result = await momentService.getMomentById(momentId);
+
+    ctx.body = result;
+
+  }
 }
 
 module.exports = new MomentController();
