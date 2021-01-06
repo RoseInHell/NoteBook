@@ -7,8 +7,9 @@ const { create, reply, update, remove, list } = require('../controller/comment.c
 const commentRouter = new Router({prefix: '/comment'});
 
 
-
+// 评论某个动态
 commentRouter.post('/', verifyAuth, create);
+
 // 对某一条评论进行回复
 commentRouter.post('/:commentId/reply', verifyAuth, reply);
 
