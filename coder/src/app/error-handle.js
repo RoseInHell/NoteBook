@@ -19,6 +19,14 @@ const errorHandler = (error, ctx) => {
       status = 400;
       message = '密码不正确~';
       break;
+    case errorType.UNAUTHORIZATION:
+      status = 401;
+      message = '无效的token~';
+      break;
+    case errorType.UNPERMISSION:
+      status = 401;
+      message = '您不具备操作的权限~';
+      break;
     default:
       status = 404;
       message = "NOT FOUND";
