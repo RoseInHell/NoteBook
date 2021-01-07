@@ -6,8 +6,10 @@ const { saveAvatarInfo, savePictureInfo } = require('../controller/file.controll
 
 const fileRouter = new Router({prefix: '/upload'});
 
-
+// 头像上传
 fileRouter.post('/avatar', verifyAuth, avatarHandler, saveAvatarInfo);
+
+// 图片上传
 fileRouter.post('/picture', verifyAuth, pictureHandler, pictureResize, savePictureInfo);
 
 
