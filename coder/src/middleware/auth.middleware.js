@@ -73,7 +73,8 @@ const verifyPermission = async (ctx, next) => {
 
   // 2.查询是否具备权限
   try {
-    const isPermission = await authService.checkResource(tableName, resourceId, id)
+    const isPermission = await authService.checkResource(tableName, resourceId, id);
+
     if (!isPermission) throw new Error();
     await next();
 
