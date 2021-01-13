@@ -8,6 +8,14 @@ class LabelController {
 
     ctx.body = result;
   }
+
+  async list(ctx, next) {
+    const { offset, limit } = ctx.query;
+
+    const result = await labelService.getLabels(offset, limit);
+
+    ctx.body =  result;
+  }
 }
 
 module.exports = new LabelController();

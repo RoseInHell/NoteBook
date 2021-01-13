@@ -16,6 +16,14 @@ class LabelService {
 
     return result[0];
   }
+
+  async getLabels(offset, limit) {
+    const statement = `SELECT * FROM label LIMIT ?, ?;`;
+
+    const [result] = await connection.execute(statement, [offset, limit]);
+
+    return result;
+  }
 }
 
 module.exports = new LabelService();
