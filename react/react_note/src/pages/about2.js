@@ -1,9 +1,8 @@
 import React from 'react';
-import { connect } from '../utils/connect'; 
+import { connect } from 'react-redux'; 
 import { addAction } from '../store/actionCreator';
 
 function About(props) {
-  console.log(props)
   return (
     <div>
       About
