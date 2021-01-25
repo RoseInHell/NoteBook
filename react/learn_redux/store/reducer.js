@@ -1,18 +1,19 @@
-import { ADD_NUMBER, SUB_NUMBER } from './constants.js'
+import {
+  ADD_NUMBER,
+  SUB_NUMBER,
+  INCREMENT,
+  DECREMENT
+} from './constants.js';
 
-const initialState = {
+
+const defaultState = {
   counter: 0
 }
 
-
-function reducer(state = initialState, action) {
+function reducer(state, action) {
   switch(action.type) {
     case ADD_NUMBER:
-      return {...state, counter:state.counter + action.num};
-    case SUB_NUMBER:
-      return {...state, counter:state.counter - action.num};
-    default: 
-      return state;
+      return {...state, conter:state.counter + action.num}
   }
 }
 

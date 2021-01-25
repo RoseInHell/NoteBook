@@ -1,0 +1,25 @@
+import {
+  ADD_NUMBER,
+  SUB_NUMBER,
+  INCREMENT,
+  DECREMENT,
+  CHANGE_BANNERS,
+  CHANGE_RECOMMEND
+} from './constants.js';
+
+
+const defaultState = {
+  counter: 0
+
+}
+
+function reducer(state = defaultState, action) {
+  switch(action.type) {
+    case ADD_NUMBER:
+      return { ...state, counter: state.counter + action.num };
+    default:
+      return state
+  }
+}
+
+export default reducer;
