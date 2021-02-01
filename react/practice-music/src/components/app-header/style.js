@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import navTitleLoge from "@/assets/img/sprite_01.png";
+import navTitleLogo from '@/assets/img/sprite_01.png';
 
 export const HeaderWrapper = styled.div`
   height: 75px;
