@@ -3,6 +3,8 @@ import React, { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import { HeaderWrapper, HeaderLeft, HeaderRight } from './style';
 import { headerLinks } from '@/common/local-data';
+import { Input } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 
 export default memo(function HYAppHeader() {
 
@@ -37,9 +39,12 @@ export default memo(function HYAppHeader() {
           </div>
         </HeaderLeft>
         <HeaderRight>
-
+          <Input className="search" prefix={<SearchOutlined/>} placeholder="音乐/视频/电台/用户" />
+          <div className="center">创作者中心</div>
+          <div>登录</div>
         </HeaderRight>
       </div>
+      <div className="divider"></div>
     </HeaderWrapper>
   )
 })
