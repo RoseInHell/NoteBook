@@ -32,28 +32,28 @@ const routes = [
         )
       },
       {
-        path: "/recommend",
+        path: "/discover/recommend",
         component: HYRecommend
       },
       {
-        path: "/ranking",
+        path: "/discover/ranking",
         component: HYRanking
       },
       {
-        path: "/songs",
+        path: "/discover/songs",
         component: HYSongs
       },
       {
-        path: "/djradio",
+        path: "/discover/djradio",
         exact: true,
         component: HYDjradio
       },
       {
-        path: "/artist",
+        path: "/discover/artist",
         component: HYArtist
       },
       {
-        path: "/album",
+        path: "/discover/album",
         component: HYAlbum
       },
       // {

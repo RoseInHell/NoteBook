@@ -5,8 +5,11 @@ import { DiscoverWrapper, TopMenu } from './style';
 import { dicoverMenu } from '@/common/local-data';
 import { NavLink } from 'react-router-dom';
 
+
 export default memo(function HYDiscover(props) {
+
   const { route } = props;
+  
   return (
     <DiscoverWrapper>
       <div className="top">
