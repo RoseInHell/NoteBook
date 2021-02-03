@@ -8,9 +8,8 @@ import {
 } from './style';
 
 import { NavLink } from 'react-router-dom';
-
-
-
+import { Input } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 
 
 export default memo(function HYAppHeader() {
@@ -45,7 +44,11 @@ export default memo(function HYAppHeader() {
             }
           </div>
         </HeaderLeft>
-        <HeaderRight></HeaderRight>
+        <HeaderRight>
+          <Input className="search" placeholder="音乐/视频/电台/用户" prefix={<SearchOutlined/>} />
+          <div className="center" >创作者中心</div>  
+          <button >登录</button>  
+        </HeaderRight>
       </div>
       <div className="divider"></div>
     </HeaderWrapper>

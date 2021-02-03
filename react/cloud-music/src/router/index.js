@@ -1,22 +1,73 @@
+
+import { Redirect } from 'react-router-dom';
+
 import HYDiscover from '@/pages/discover';
+import HYRecommend from '@/pages/discover/c-pages/recommend';
+import HYRanking from '@/pages/discover/c-pages/ranking';
+import HYDjradio from '@/pages/discover/c-pages/djradio';
+import HYSongs from '@/pages/discover/c-pages/songs';
+import HYArtist from '@/pages/discover/c-pages/artist';
+import HYAlbum from '@/pages/discover/c-pages/album';
 import HYMine from '@/pages/mine';
 import HYFriends from '@/pages/friends';
 
 
 const routes = [
   {
-    path: "/",
+    path: '/',
     exact: true,
-    component: HYDiscover
+    render: () => (
+      <Redirect to="/discover"/>
+    )
+  },
+  {
+    path: "/discover",
+    component: HYDiscover,
+    routes: [
+      {
+        path: "/discover",
+        exact: true,
+        render: () => (
+          <Redirect to="/discover/recommend"/>
+        )
+      },
+      {
+        path: "/recommend",
+        component: HYRecommend
+      },
+      {
+        path: "/ranking",
+        component: HYRanking
+      },
+      {
+        path: "/songs",
+        component: HYSongs
+      },
+      {
+        path: "/djradio",
+        exact: true,
+        component: HYDjradio
+      },
+      {
+        path: "/artist",
+        component: HYArtist
+      },
+      {
+        path: "/album",
+        component: HYAlbum
+      },
+      // {
+      //   path: "/discover/player",
+      //   component: HYPlayer
+      // }
+    ]
   },
   {
     path: "/mine",
-    exact: true,
     component: HYMine
   },
   {
     path: "/friends",
-    exact: true,
     component: HYFriends
   },
 ]
