@@ -1,24 +1,25 @@
-import React, { memo, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { memo } from 'react';
 
-import { getTopBannerAction } from './store/actionCreators'
-
+import { RecommendWrapper, RecommendLeft, Content, RecommendRight } from './style';
+import HYTopBanner from './c-cpns/top-banner';
+import HYTopRecommend from './c-cpns/hot-recommend';
+import HYNewAlbum from './c-cpns/new-album';
+import HYRecommendRanking from './c-cpns/recommend-ranking';
 
 function HYRecommend(props) {
   
-  const { topBanners } = useSelector(state => ({
-    topBanners: state.recommend.topBanners
-  }))
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getTopBannerAction())
-  }, [dispatch])
-
   return (
-    <div>
-      <h2>{topBanners.length}</h2>
-    </div>
+    <RecommendWrapper>
+      <HYTopBanner/>
+      <Content className="wrap-v2">
+        <RecommendLeft>
+          <HYTopRecommend/>
+          <HYNewAlbum/>
+          <HYRecommendRanking/>
+        </RecommendLeft>
+        <RecommendRight></RecommendRight>
+      </Content>
+    </RecommendWrapper>
   )
 }
 
