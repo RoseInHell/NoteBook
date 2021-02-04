@@ -1,9 +1,22 @@
-import React, { memo } from 'react'
+import React, { memo } from 'react';
 
-export default memo(function HYRecommend() {
+import { RecommendWrapper, RecommendLeft, Content, RecommendRight } from './style';
+import HYTopBanner from './c-cpns/top-banner';
+import HYHotRecommend from './c-cpns/hot-recommend';
+
+
+function HYRecommend() {
   return (
-    <div>
-      
-    </div>
+    <RecommendWrapper>
+      <HYTopBanner/>
+      <Content className="wrap-v2">
+        <RecommendLeft>
+          <HYHotRecommend/>
+        </RecommendLeft>
+        <RecommendRight></RecommendRight>
+      </Content>
+    </RecommendWrapper>
   )
-})
+}
+
+export default memo(HYRecommend);
