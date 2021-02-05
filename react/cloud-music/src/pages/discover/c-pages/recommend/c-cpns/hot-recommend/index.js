@@ -5,6 +5,7 @@ import HYThemeHeaderRCM from '@/components/theme-header-rcm';
 import { HotRecommendWrapper } from './style';
 import { getHotRecommendsAction } from '../../store/actionCreators';
 import { HOT_RECOMMEND_LIMIT } from '@/common/constants';
+import HYSongsCover from '@/components/songs-cover';
 
 export default memo(function HYHotRecommend() {
 
@@ -26,9 +27,7 @@ export default memo(function HYHotRecommend() {
       <div className="recommend-list">
         {
           hotRecommends.map((item, index) => {
-            return (
-              <div key={item}></div>
-            )
+            return <HYSongsCover key={item.id} info={item} />
           })
         }
       </div>
