@@ -4,6 +4,8 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import HYTemeHeaderRCM from '@/components/theme-header-rcm';
 import { HotRecommendWrapper } from './style';
 import { getHotRecommendAction } from '../../store/actionCreators';
+import { HOT_RECOMMEND_LIMIT } from '@/common/constants';
+import HYSongsCover from '@/components/songs-cover';
 
 export default memo(function HYHotRecommend() {
 
@@ -16,7 +18,7 @@ export default memo(function HYHotRecommend() {
 
   // other hooks
   useEffect(() => {
-    dispatch(getHotRecommendAction())
+    dispatch(getHotRecommendAction(HOT_RECOMMEND_LIMIT))
   }, [dispatch]);
 
   return (
@@ -25,11 +27,7 @@ export default memo(function HYHotRecommend() {
       <div className="recommend-list">
         {
           hotRecommends.map((item, index) => {
-            return (
-              <div key={item.id}>
-                {item.id}
-              </div>
-            )
+            return <HYSongsCover key={item.id} info={item} />
           })
         }
       </div>
