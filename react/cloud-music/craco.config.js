@@ -8,5 +8,11 @@ module.exports = {
       "@": resolve("src"),
       "component": resolve("src/components")
     }
-  }
+  },
+  // babel: {
+    // plugins: [
+    //   ['import', { libraryName: 'antd', libraryDirectory: 'es', style: 'css' }],
+    //   ['@babel/plugin-proposal-decorators', { legacy: true }]
+    // ]
+  // }
 }
