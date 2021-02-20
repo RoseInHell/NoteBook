@@ -5,7 +5,8 @@ module.exports = {
   entry: "./src/main.js",
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "./build")
+    path: path.resolve(__dirname, "./build"),
+    // assetModuleFilename: "img/[name].[hash:6][ext]"
   },
   module: {
     rules: [
@@ -47,6 +48,39 @@ module.exports = {
           "postcss-loader",
           { loader: "less-loader" }
         ]
+      },
+      // {
+      //   test: /\.(png|jpe?g|gif|svg)$/,
+      //   use: [
+      //     {
+      //       loader: 'file-loader',
+      //       options: {
+      //         name: 'img/[name].[hash:6].[ext]'
+      //         // outputPath: "img"
+      //       }
+      //     }
+      //   ]
+      // }
+      {
+        test: /\.(png|jpe?g|gif|svg)$/,
+        // type: "asset/resource", // file-loader的效果
+        // type: "asset/inline", // url-loader的效果
+        type: "asset",
+        generator: {
+          filename: "img/[name].[hash:6][ext]"
+        },
+        parser: {
+          dataUrlCondition: {
+            maxSize: 100 * 1024 // 100字节
+          }
+        }
+      },
+      {
+        test: /\.(ttf|eot|woff2?)$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "font/[name].[hash:6][ext]"
+        }
       }
     ]
   }

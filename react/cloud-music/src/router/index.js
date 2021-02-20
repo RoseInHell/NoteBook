@@ -11,7 +11,7 @@ const HYArtist = React.lazy(_ => import("../pages/discover/c-pages/artist"));
 const HYAlbum = React.lazy(_ => import("../pages/discover/c-pages/album"));
 const HYPlayer = React.lazy(_ => import("../pages/player"));
 
-const HYFriends = React.lazy(_ => import("../pages/friend"));
+const HYFriends = React.lazy(_ => import("../pages/friends"));
 const HYMine = React.lazy(_ => import("../pages/mine"));
 
 // import HYDiscover from '@/pages/discover';

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import bannerRightImg from '@/assets/img/download.png';
+// import bannerRightImg from '@/assets/img/download.png';
 import bannerControl from '@/assets/img/banner_sprite.png';
 
 
@@ -12,11 +12,14 @@ export const BannerWrapper = styled.div`
 
     display: flex;
     position: relative;
+    
+    
   }
 `
 
 export const BannerLeft = styled.div`
   width: 730px;
+
 
   .banner-item {
     overflow: hidden;
@@ -33,7 +36,7 @@ export const BannerRight = styled.a.attrs({
 })`
   width: 254px;
   height: 270px;
-  background: url(${bannerRightImg});
+  background: url(${require('@/assets/img/download.png').default});
 `
 
 export const BannerControl = styled.div`

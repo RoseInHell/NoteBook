@@ -47,6 +47,30 @@ module.exports = {
           "postcss-loader",
           { loader: "less-loader" }
         ]
+      },
+      // {
+      //   test: /\.(png|jpe?g|gif|svg)$/,
+      //   use: [
+      //     {
+      //       loader: 'file-loader',
+      //       options: {
+      //         name: 'img/[name].[hash:6].[ext]'
+      //         // outputPath: "img"
+      //       }
+      //     }
+      //   ]
+      // }
+      {
+        test: /\.(png|jpe?g|gif|svg)$/,
+        use:[
+          {
+            loader: 'url-loader',
+            options: {
+              name: 'img/[name].[hash:6].[ext]',
+              limit: 100 * 1024 // 字节显示 100 * 1024 = 100字节
+            }
+          }
+        ]
       }
     ]
   }
