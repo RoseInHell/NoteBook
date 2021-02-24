@@ -1,11 +1,11 @@
 const path = require('path');
-const { CleanWebpackPlugin } = require('../07_web/node_modules/clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: "development",
+  devtool: 'eval',
   entry: "./src/index.js",
-  devtool: "source-map",
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "./build"),
