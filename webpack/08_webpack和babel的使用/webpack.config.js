@@ -1,11 +1,11 @@
 const path = require('path');
-const { CleanWebpackPlugin } = require('../08_webpack和babel的使用/node_modules/clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: "development",
   devtool: 'cheap-module-source-map',
-  entry: "./src/index.js",
+  entry: "./src/react.jsx",
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "./build"),
@@ -14,13 +14,18 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
         use: [
           {
             loader: "babel-loader",
-            options: {
-              presets: ["@babel/preset-env"]
-            }
+            // options: {
+            //   presets: [
+            //     ["@babel/preset-env", {
+            //       target: ["chrome 88"]
+            //     }]
+            //   ]
+            // }
           }
         ]
       }
@@ -29,7 +34,8 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: "coder why"
+      title: "coder why",
+      template: "./index.html"
     })
   ]
 
