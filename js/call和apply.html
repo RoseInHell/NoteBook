@@ -35,13 +35,12 @@
             }
         };
         var obj2 = { name: 'obj2' };
-        // fun.apply(obj);
-        // fun.call(obj2);
-        // fun();
-        // obj.sayName.apply(obj2);
+        fun.apply(obj);
+        fun.call(obj2);
+        fun();
+        obj.sayName.apply(obj2);
         fun.call(obj,2,3);
         fun.apply(obj2, [2,3]);
-
 
     </script>    
 </body>
