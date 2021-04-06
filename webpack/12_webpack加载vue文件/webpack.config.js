@@ -1,18 +1,34 @@
 const path = require('path');
-const { CleanWebpackPlugin } = require('../11_webpack中ESLint的使用/node_modules/clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
   mode: "development",
   devtool: 'cheap-module-source-map',
-  entry: "./src/index.ts",
+  entry: "./src/index.js",
   output: {
     filename: "bundle.js",
+    // eslint-disable-next-line no-undef
     path: path.resolve(__dirname, "./build"),
     // assetModuleFilename: "img/[name].[hash:6][ext]"
   },
   module: {
     rules: [
+      {
+        test: /\.less$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 2
+            }
+          },
+          "postcss-loader",
+          "less-loader"
+        ]        
+      },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
@@ -26,6 +42,9 @@ module.exports = {
             //     }]
             //   ]
             // }
+          },
+          {
+            loader: "eslint-loader"
           }
         ]
       },
@@ -39,6 +58,12 @@ module.exports = {
         exclude: /node_modules/,
         use: "babel-loader",
         
+      },
+      {
+        test: /\.vue$/,
+        use: [
+          'vue-loader'
+        ]
       }
     ]
   },
@@ -47,7 +72,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: "coder why",
       template: "./index.html"
-    })
+    }),
+    new VueLoaderPlugin()
   ]
 
 }

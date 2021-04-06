@@ -1,13 +1,14 @@
 const path = require('path');
-const { CleanWebpackPlugin } = require('../11_webpack中ESLint的使用/node_modules/clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: "development",
   devtool: 'cheap-module-source-map',
-  entry: "./src/index.ts",
+  entry: "./src/index.js",
   output: {
     filename: "bundle.js",
+    // eslint-disable-next-line no-undef
     path: path.resolve(__dirname, "./build"),
     // assetModuleFilename: "img/[name].[hash:6][ext]"
   },
@@ -26,6 +27,9 @@ module.exports = {
             //     }]
             //   ]
             // }
+          },
+          {
+            loader: "eslint-loader"
           }
         ]
       },

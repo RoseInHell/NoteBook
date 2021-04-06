@@ -6,4 +6,6 @@ const foo = (info: string) => {
 
 foo(message);
 
+const p = new Promise((resolve, reject) => {})
+
 export {}
