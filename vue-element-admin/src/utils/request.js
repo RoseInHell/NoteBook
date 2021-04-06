@@ -8,8 +8,8 @@ const service = axios.create({
 
 service.interceptors.request.use(
   (config) => {
-  // 如果是post，设置content-type
-  // 默认使用application/x-www-form-urlencoded，当接口格式需要为application/json时，在对应接口请求里面配置即可
+    // 如果是post，设置content-type
+    // 默认使用application/x-www-form-urlencoded，当接口格式需要为application/json时，在对应接口请求里面配置即可
     if (config.method === 'post' || config.method === 'put') {
       if (config.headers.post['Content-Type'] === 'application/json') {
         return config;
@@ -36,11 +36,15 @@ service.interceptors.response.use(
       });
       // 50008:非法的token; 50012:其他客户端登录了;  50014:Token 过期了;
       if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
-        MessageBox.confirm('你已被登出，可以取消继续留在该页面，或者重新登录', '确定登出', {
-          confirmButtonText: '重新登录',
-          cancelButtonText: '取消',
-          type: 'warning',
-        });
+        MessageBox.confirm(
+          '你已被登出，可以取消继续留在该页面，或者重新登录',
+          '确定登出',
+          {
+            confirmButtonText: '重新登录',
+            cancelButtonText: '取消',
+            type: 'warning',
+          },
+        );
       }
 
       return Promise.reject(new Error(res.message || 'Error'));
