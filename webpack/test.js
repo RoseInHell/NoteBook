@@ -1,12 +1,10 @@
-// const array = [
-//   {a: 1},
-//   {b: 2},
-//   {c: 3}
-// ]
-
-// array.map((item, index, array) => {
-//   console.log(array)
-// })
-let obj = {"a":1, "b":2};
-let map = new Map(Object.entries(obj))
-console.log(map)
+var minCostClimbingStairs = function(cost) {
+  const n = cost.length;
+  let dp = []
+  dp[0] = 0;
+  dp[1] = Math.min(cost[0], cost[1])
+  for(let i=2; i<n; i++) {
+    dp[i] = Math.min(dp[i-1] + cost[i], dp[i-2] + cost[i-1])
+  }
+  return dp[n-1]
+};
