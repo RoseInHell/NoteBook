@@ -1,15 +1,35 @@
 <template>
   <div id="app">
-    <el-button type="primary">默认按钮</el-button>
+    <router-link to="/home">home</router-link>
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'App',
-  components: {},
+  data() {
+    return {
+    };
+  },
+  components: {
+  },
   created() {},
 };
 </script>
 
-<style></style>
+<style>
+.scroller {
+  height: 100%;
+}
+
+.user {
+  height: 32%;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+}
+</style>
