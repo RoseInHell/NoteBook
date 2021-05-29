@@ -60,3 +60,4 @@ function quick_sort(arr, from, to) {
 
 var arr = [3,2,1];
 quick_sort(arr, 0, arr.length-1);
+console.log(arr)
