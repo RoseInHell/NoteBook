@@ -9,7 +9,7 @@ Function.prototype.bind2 = function(context) {
   var args = Array.prototype.slice.call(arguments, 1);
   // 用空函数做中转
   var fNOP = function () {};
-  
+
   var fbound = function() {
     var bindArgs = Array.prototype.slice.call(arguments);
     /* 
@@ -22,7 +22,7 @@ Function.prototype.bind2 = function(context) {
       当作为普通函数时，this 指向 window，self 指向绑定函数，
       此时结果为 false，当结果为 false 的时候，this 指向绑定的 context。
     */
-    return self.apply(this instanceof self ? this : context, args.concat(bindArgs))
+    return self.apply(this instanceof self ? this : context, args.concat(bindArgs));
   }
   // 修改返回函数的 prototype 为绑定函数的 prototype，实例就可以继承函数的原型中的值
 
