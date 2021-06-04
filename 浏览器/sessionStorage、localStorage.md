@@ -24,3 +24,5 @@ Chrome更新89版本后，sessionStorage丢失a标签跳转丢失sessionStorage
   <a target="_blank" href="www.XXXXX.com" rel="opener"></a>
 ```
 或者 window.open()
+
+如果一个链接元素设置了target=_blank，同时希望新开页面有window.opener对象，则可以给链接元素添加rel="opener"。

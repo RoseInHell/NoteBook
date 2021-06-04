@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+
+<h1>关于 浏览器多标签页共享用户信息 的逻辑说明，见源代码</h1>
+
+
+
+<button id="update">更新Store</button>
+
+
+
+<script>
+{
+
+  // main.js
+
+  // 浏览器多标签页共享用户信息
+  // 由于用户信息存储在sessionStorage里面，新标签页无法直接获取，所以需要通过window对象的storage事件来获取
+  // 该事件有个特性，不会在导致数据变化的当前页面触发（如果浏览器同时打开一个域名下面的多个页面，当其中的一个页面改变localStorage的数据时，其他所有页面的storage事件会被触发，而原始页面并不触发storage事件）
+
+  // 有2种情况
+  // 1: “新标签页”初始打开站点的时候向“旧标签页”获取用户信息
+  // 2: “当前标签页”更新了用户信息，广播给“其它标签页”
+
+  // 1-1 新标签页初始进入，写一条临时的localStorage数据，这个动作会触发旧标签页的storage事件
+  localStorage.setItem('getSessionStorage', new Date().getTime())
+
+  // 1-7 新标签页删除第1-1步临时创建的localStorage
+  localStorage.removeItem('getSessionStorage')
+
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'getSessionStorage') {
+      // 1-8 旧标签页发现是第1-7步的新标签页的删除动作，不处理，返回
+      if (!event.newValue) return
+
+      // 1-2 旧标签页将sessionStorage里面的用户信息临时存入localStorage，这个动作会同时触发新标签页的storage事件
+      localStorage.setItem('setSessionStorage', JSON.stringify(JSON.parse(sessionStorage.getItem('_userinfo_caches'))))
+
+      // 1-5 旧标签页删除第1-2步临时存入localStorage的用户信息，这个动作会同时触发新标签页的storage事件
+      localStorage.removeItem('setSessionStorage')
+    } else if (event.key === 'setSessionStorage') {
+      // 1-6 新标签页发现是第1-5步的旧标签页的删除动作，不处理，返回
+      // 2-6 其它标签页发现是第2-5步的当前标签页的删除动作，不处理，返回
+      if (!event.newValue) return
+
+      // 1-3 新标签页获取到旧标签页刚刚存入localStorage里面的用户信息，写入store（store里面后续会把用户信息存入sessionStorage）
+      // 2-3 其它标签页获取到当前标签页刚刚存入localStorage里面的用户信息，写入store（store里面后续会把用户信息存入sessionStorage）
+      updateStore(JSON.parse(event.newValue), true)
+      // store.commit('app/user/UPDATE_USER', data)
+    }
+  })
+
+
+  // store/app/user.js
+
+  function updateStore (data, isReceiveSessionStorage) {
+    // 1-4 新标签页获取到旧标签页的用户信息，写入sessionStorage
+    // 2-1 当前标签页更新了用户信息，写入sessionStorage
+    // 2-4 其它标签页获取到新的用户信息，写入sessionStorage
+    sessionStorage.setItem('_userinfo_caches', JSON.stringify(data))
+
+    // 当前标签页更新了用户信息，广播给其它标签页
+    if (!isReceiveSessionStorage) {
+      // 2-2 当前标签页将新的用户信息临时存入localStorage，这个动作会同时触发其它标签页的storage事件
+      localStorage.setItem('setSessionStorage', JSON.stringify(data))
+
+      // 2-5 当前标签页删除第2-2步临时存入localStorage的用户信息，这个动作会同时触发其它标签页的storage事件
+      localStorage.removeItem('setSessionStorage')
+    }
+  }
+
+
+  // 项目其它地方，例如登录成功之后更新用户信息
+
+  document.querySelector('#update').addEventListener('click', (e) => {
+    updateStore({
+      id: 100
+    })
+  }, false)
+
+}
+</script>
+
+
+</body>
+</html>

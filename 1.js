@@ -1,33 +1,17 @@
-function mergeSort(arr) {
-  let len = arr.length;
+Function.prototype.bind2 = function(context) {
+  var self = this;
 
-  if (len < 2) {
-    return arr;
+  var args = Array.prototype.slice(arguments,1);
+
+  var fNOP = function() {};
+
+  var fbound = function() {
+    var bindArgs = Array.prototype.slice(arguments);
+
+    return self.apply(this instanceof self ? this : context, args.concat(bindArgs));
   }
 
-  let middle = Math.floor(len / 2);
-  let left = arr.slice(0, middle);
-  let right = arr.slice(middle);
-
-  return merge(mergeSort(left), mergeSort(right));
+  fNOP.prototype = self.prototype
+  fbound.prototype = new fNOP();
+  return fbound;
 }
-
-function merge(left, right) {
-  const result = [];
-
-  while (left.length && right.length) {
-    if (left[0] <= right[0]) {
-      result.push(left.shift());
-    } else {
-      result.push(right.shift());
-    }
-  }
-
-  while (left.length) result.push(left.shift());
-
-  while (right.length) result.push(right.shift());
-
-  return result;
-}
-
-console.log(mergeSort([ 0, -1, 3, 4, 10 ]))
