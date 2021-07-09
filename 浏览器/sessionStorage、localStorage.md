@@ -26,3 +26,7 @@ Chrome更新89版本后，sessionStorage丢失a标签跳转丢失sessionStorage
 或者 window.open()
 
 如果一个链接元素设置了target=_blank，同时希望新开页面有window.opener对象，则可以给链接元素添加rel="opener"。
+
+localStorage多个标签页可以共享数据，
+而SessionStorage多个标签页不可共享数据！！！因为每个tab页都是独立的会话
+请区分sessionStorage跳转丢失信息和多标签页共享信息是不同的知识点
