@@ -1,18 +1,28 @@
-var permute = function(nums) {
-  const res = [];
-  for (let i=0; i<nums.length; i++) {
-    for (let j=0; j<nums.length; j++) {
-      var temp = nums[i];
-      nums[i] = nums[j];
-      nums[j] = temp;
-      res.push([...nums])
-      temp = nums[i]
-      nums[i] = nums[j];
-      nums[j] = temp;
-    }
+function Foo() {
+  getName = function () {
+    console.log(1);
   }
-  return res;
-};
+  return this;
+}
 
-console.log(permute([1,2,3]))
-// console.log(permute([0,1]))
+Foo.getName = function () {
+  console.log(2);
+}
+Foo.prototype.getName = function () {
+  console.log(3);
+}
+var getName = function () {
+  console.log(4);
+}
+function getName() {
+  console.log(5)
+}
+
+
+Foo.getName(); // 2
+getName(); // 4
+Foo().getName(); // 1
+getName(); // 1
+new Foo.getName(); // 2
+new Foo().getName(); // 3
+new new Foo().getName(); // 3
