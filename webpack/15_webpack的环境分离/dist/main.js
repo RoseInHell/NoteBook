@@ -1,1 +1,0 @@
-(()=>{for(var o=function(o){setTimeout((function(){console.log(new Date,o)}),1e3)},e=0;e<5;e++)o(e);console.log(new Date,e)})();
